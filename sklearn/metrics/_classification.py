@@ -180,6 +180,9 @@ def accuracy_score(y_true, y_pred, normalize=True, sample_weight=None):
     >>> accuracy_score(np.array([[0, 1], [1, 1]]), np.ones((2, 2)))
     0.5
     """
+    
+    y_true = sum(y_true.tolist(), [])
+    y_pred = sum(y_pred.tolist(), [])
 
     # Compute accuracy for each possible representation
     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
@@ -268,6 +271,8 @@ def confusion_matrix(y_true, y_pred, labels=None, sample_weight=None,
     (0, 2, 1, 1)
 
     """
+    y_true = sum(y_true.tolist(), [])
+    y_pred = sum(y_pred.tolist(), [])
     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
     if y_type not in ("binary", "multiclass"):
         raise ValueError("%s is not supported" % y_type)
@@ -1896,7 +1901,8 @@ def classification_report(y_true, y_pred, labels=None, target_names=None,
     weighted avg       1.00      0.67      0.80         3
     <BLANKLINE>
     """
-
+    y_true = sum(y_true.tolist(), [])
+    y_pred = sum(y_pred.tolist(), [])
     y_type, y_true, y_pred = _check_targets(y_true, y_pred)
 
     labels_given = True
